@@ -1,4 +1,5 @@
 import { Item } from 'src/items/entities/item.entity';
+import { Order } from 'src/orders/entities/order.entity';
 import {
   Entity,
   Column,
@@ -30,6 +31,12 @@ export class User {
 
   @OneToMany(() => Item, (item) => item.owner, { nullable: true })
   items: Item[];
+
+  @OneToMany(() => Order, (order) => order.seller, { nullable: true })
+  ordersToSell: Order[];
+
+  @OneToMany(() => Order, (order) => order.bayer, { nullable: true })
+  ordersToBay: Order[];
 
   @CreateDateColumn({
     type: 'timestamp',

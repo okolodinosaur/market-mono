@@ -38,11 +38,14 @@ $ npm run test:cov
 
 - [+] JWT Authorization
 - - [+] Registration and auth
-- [] Items
+- [+] Items
+- [] Orders
 - [] Buy`s mechanics
 
 кто создает items, items внутри системы, юзер может только оформить ордер на item.
 контроллеры дописаны, сохранить в базу несколько items, затем ордеры и логика присвоения овнера
+
+сущности созданы, связи настроены, дописать контроллер и сервис ордеров
 
 ## For feature
 

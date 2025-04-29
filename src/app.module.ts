@@ -8,6 +8,8 @@ import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { ItemsModule } from './items/items.module';
 import { Item } from './items/entities/item.entity';
+import { OrdersModule } from './orders/orders.module';
+import { Order } from './orders/entities/order.entity';
 
 @Module({
   imports: [
@@ -18,12 +20,13 @@ import { Item } from './items/entities/item.entity';
       username: 'admin',
       password: 'admin',
       database: 'market',
-      entities: [User, Item],
+      entities: [User, Item, Order],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
     ItemsModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
