@@ -19,21 +19,27 @@ export class Order {
   @Column()
   price: number;
 
-  @Column()
-  active: true;
+  @Column({ default: true })
+  active: boolean;
 
   @Column({ default: null, nullable: true })
   closeDate: Date;
 
-  @ManyToOne(() => User, (bayer) => bayer.id)
+  @ManyToOne(() => User, (bayer) => bayer.id, { nullable: true })
   bayer: User;
+  @Column({ nullable: true })
+  bayerId: number;
 
   @ManyToOne(() => User, (seller) => seller.id)
   seller: User;
+  @Column()
+  sellerId: number;
 
   @OneToOne(() => Item, (item) => item.id)
   @JoinColumn()
   item: Item;
+  @Column()
+  itemId: number;
 
   @CreateDateColumn({
     type: 'timestamp',

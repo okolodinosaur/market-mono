@@ -1,15 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UsePipes,
+  ValidationPipe,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
+
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthRequest } from 'src/auth/auth.interfaces';
 
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
-  create(@Body() createOrderDto: CreateOrderDto) {
-    return this.ordersService.create(createOrderDto);
+  @UseGuards(AuthGuard)
+  @UsePipes(new ValidationPipe())
+  create(
+    @Request() request: AuthRequest,
+    @Body() createOrderDto: CreateOrderDto,
+  ) {
+    const sellerId = request.user.sub;
+    return this.ordersService.create(createOrderDto, sellerId);
   }
 
   @Get()
